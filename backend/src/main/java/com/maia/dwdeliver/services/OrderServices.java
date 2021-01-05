@@ -18,4 +18,7 @@ public interface OrderServices {
 	
 	@Transactional
 	OrderDTO save(OrderDTO obj);
+	
+	@Transactional
+	OrderDTO setDelivered(Long id);
 }
