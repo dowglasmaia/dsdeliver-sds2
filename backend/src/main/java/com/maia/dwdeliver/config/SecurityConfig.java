@@ -1,4 +1,4 @@
-package com.maia.MaiaDeliver.config;
+package com.maia.dwdeliver.config;
 
 import java.util.Arrays;
 
