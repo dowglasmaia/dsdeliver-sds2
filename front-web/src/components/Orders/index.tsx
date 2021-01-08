@@ -6,6 +6,7 @@ import ProductsList from "./ProductsList"
 import "./styles.css"
 import { Product } from "./types";
 import { fetchProducts } from "../../Api";
+import OrderLocation from "./OrderLocation";
 /*
 interface IProductProps {
     id: number,
@@ -37,6 +38,8 @@ function Order() {
             <StepsHeader />
 
             <ProductsList products={products}/>
+
+            <OrderLocation/>
 
         </div>
     )
