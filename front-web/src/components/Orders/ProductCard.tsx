@@ -7,15 +7,8 @@ type Props = {
     onSelectProduct:(product: Product) => void;
 }
 
-/* Formatando Valores Moeda*/
-function formatPrice(price: number) {
-    const formatter = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-        minimumFractionDigits:2
-    })
-    return formatter.format(price)
-}
+import {formatPrice} from './helpers';
+
 
 function ProductCard({ product,isSelected ,onSelectProduct }: Props) {
     return (

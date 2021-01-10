@@ -11,14 +11,20 @@ import OrderSummary from "./OrderSummary";
 import Footer from "../Footer";
 import { checkIsCelected } from "./helpers";
 
+
 function Order() {
 
     // inicializando a lista Vazia.
     const [products, setProducts] = useState<Product[]>([]);
     const [selectedProducts, setSelectedProducts] = useState<Product[]>([]); // armazena a lista de produtos selecionados
-    
+
     //pegando os dados da localização para enviar para a API de Back-end;
     const [orderLocation, setOrderLocation] = useState<OrderLocationData>();
+
+    /* realizando a soma dos valores dos itens com REDUCE*/
+    const totalPrice = selectedProducts.reduce((sum, item) => {
+        return sum + item.price
+    }, 0)
 
     useEffect(() => {
 
@@ -36,14 +42,14 @@ function Order() {
 
         /* verificando se o produto ja estar selecionado */
         const isAlreadySelected = checkIsCelected(selectedProducts, product);
-      
+
         if (isAlreadySelected) {
-          const selected = selectedProducts.filter(item => item.id !== product.id);
-          setSelectedProducts(selected);
+            const selected = selectedProducts.filter(item => item.id !== product.id);
+            setSelectedProducts(selected);
         } else {
-          setSelectedProducts(previous => [...previous, product]);
+            setSelectedProducts(previous => [...previous, product]);
         }
-      }
+    }
 
     return (
         <>
@@ -51,15 +57,18 @@ function Order() {
 
                 <StepsHeader />
 
-                <ProductsList 
-                    products={products} 
-                    onSelectProduct ={handleSelectProduct}
+                <ProductsList
+                    products={products}
+                    onSelectProduct={handleSelectProduct}
                     selectedProducts={selectedProducts}
                 />
 
                 <OrderLocation onChangeLocation={location => setOrderLocation(location)} />
 
-                <OrderSummary />
+                <OrderSummary
+                    amount={selectedProducts.length}
+                    totalPrice={totalPrice}
+                />
 
             </div>
 

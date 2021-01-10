@@ -1,15 +1,33 @@
-function OrderSummary() {
+import { formatPrice } from "./helpers";
+
+interface IOrderSummaryProps {
+    amount: number,
+    totalPrice: number
+}
+
+//import {formatPrice} from './helpers'
+
+function OrderSummary({
+    amount,
+    totalPrice
+}: IOrderSummaryProps) {
+
     return (
         <div className="order-summary-container">
             <div className="order-summary-content">
                 <div>
                     <span className="amount-selected-container">
-                        <strong className="amount-selected">2</strong>
-                    PEDIDOS SELECIONADOS
+                        <strong className="amount-selected">
+                            {amount}
+                        </strong>
+                            PEDIDOS SELECIONADOS
                     </span>
 
                     <span className="order-summary-total">
-                        <strong className="amount-selected">R$ 200,00 VALOR TOTAL </strong>
+                        <strong className="amount-selected">
+                            {formatPrice(totalPrice)}
+                        </strong>
+                        VALOR TOTAL
                     </span>
                 </div>
 
