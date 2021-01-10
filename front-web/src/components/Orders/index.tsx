@@ -7,24 +7,19 @@ import "./styles.css"
 import { OrderLocationData, Product } from "./types";
 import { fetchProducts } from "../../Api";
 import OrderLocation from "./OrderLocation";
-/*
-interface IProductProps {
-    id: number,
-    name: string,
-    description: string,
-    imageUri: string,
-    price: number
-}*/
-
+import OrderSummary from "./OrderSummary";
+import Footer from "../Footer";
+import { checkIsCelected } from "./helpers";
 
 function Order() {
-    
+
     // inicializando a lista Vazia.
-    const [products, setProducts] = useState<Product[]>([]);  
+    const [products, setProducts] = useState<Product[]>([]);
+    const [selectedProducts, setSelectedProducts] = useState<Product[]>([]); // armazena a lista de produtos selecionados
     
     //pegando os dados da localização para enviar para a API de Back-end;
-    const[orderLocation, setOrderLocation] = useState<OrderLocationData>();
-    
+    const [orderLocation, setOrderLocation] = useState<OrderLocationData>();
+
     useEffect(() => {
 
         console.log(products)
@@ -35,16 +30,41 @@ function Order() {
 
     }, [])
 
+
+    /* pegando a lsita de Produtos selecionados */
+    const handleSelectProduct = (product: Product) => {
+
+        /* verificando se o produto ja estar selecionado */
+        const isAlreadySelected = checkIsCelected(selectedProducts, product);
+      
+        if (isAlreadySelected) {
+          const selected = selectedProducts.filter(item => item.id !== product.id);
+          setSelectedProducts(selected);
+        } else {
+          setSelectedProducts(previous => [...previous, product]);
+        }
+      }
+
     return (
-        <div className="orders-container">
+        <>
+            <div className="orders-container">
 
-            <StepsHeader />
+                <StepsHeader />
 
-            <ProductsList products={products}/>
+                <ProductsList 
+                    products={products} 
+                    onSelectProduct ={handleSelectProduct}
+                    selectedProducts={selectedProducts}
+                />
 
-            <OrderLocation onChangeLocation={location => setOrderLocation(location)}/>
+                <OrderLocation onChangeLocation={location => setOrderLocation(location)} />
 
-        </div>
+                <OrderSummary />
+
+            </div>
+
+            <Footer />
+        </>
     )
 
 }

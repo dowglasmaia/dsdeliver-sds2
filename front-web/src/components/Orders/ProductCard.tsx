@@ -3,6 +3,8 @@ import { Product } from './types';
 
 type Props = {
     product: Product;
+    isSelected: boolean;
+    onSelectProduct:(product: Product) => void;
 }
 
 /* Formatando Valores Moeda*/
@@ -15,9 +17,12 @@ function formatPrice(price: number) {
     return formatter.format(price)
 }
 
-function ProductCard({ product }: Props) {
+function ProductCard({ product,isSelected ,onSelectProduct }: Props) {
     return (
-        <div className="order-card-container">
+        <div 
+            className={`order-card-container ${isSelected ? 'selected' : '' }`  /* se estiver selecionado add a class selected deixa o card com marcação*/}
+            onClick={ () => onSelectProduct(product) }
+            >
             <h3 className="order-card-title">
                 {product.name}
             </h3>
