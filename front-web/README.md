@@ -18,3 +18,7 @@
 * https://github.com/axios/axios
 
 * ## Mapas  | https://react-leaflet.js.org/
+
+* ## https://react-select.com/home
+
+* ## API de Maps | https://www.mapbox.com/

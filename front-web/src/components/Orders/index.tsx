@@ -4,7 +4,7 @@ import StepsHeader from "./StepsHeader"
 import ProductsList from "./ProductsList"
 
 import "./styles.css"
-import { Product } from "./types";
+import { OrderLocationData, Product } from "./types";
 import { fetchProducts } from "../../Api";
 import OrderLocation from "./OrderLocation";
 /*
@@ -20,7 +20,10 @@ interface IProductProps {
 function Order() {
     
     // inicializando a lista Vazia.
-    const [products, setProducts] = useState<Product[]>([]);    
+    const [products, setProducts] = useState<Product[]>([]);  
+    
+    //pegando os dados da localização para enviar para a API de Back-end;
+    const[orderLocation, setOrderLocation] = useState<OrderLocationData>();
     
     useEffect(() => {
 
@@ -39,7 +42,7 @@ function Order() {
 
             <ProductsList products={products}/>
 
-            <OrderLocation/>
+            <OrderLocation onChangeLocation={location => setOrderLocation(location)}/>
 
         </div>
     )
