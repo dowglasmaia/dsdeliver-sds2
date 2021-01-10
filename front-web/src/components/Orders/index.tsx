@@ -2,14 +2,19 @@ import { useEffect, useState } from "react"
 
 import StepsHeader from "./StepsHeader"
 import ProductsList from "./ProductsList"
-
-import "./styles.css"
-import { OrderLocationData, Product } from "./types";
-import { fetchProducts } from "../../Api";
 import OrderLocation from "./OrderLocation";
 import OrderSummary from "./OrderSummary";
 import Footer from "../Footer";
 import { checkIsCelected } from "./helpers";
+
+import { OrderLocationData, Product } from "./types";
+
+import { fetchProducts, saveOrder } from "../../Api";
+
+import "./styles.css"
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Order() {
@@ -32,8 +37,10 @@ function Order() {
         /* Listando produtos com requisição HTTP*/
         fetchProducts()
             .then(response => setProducts(response.data))
-            .catch(error => console.log(error))
-
+            .catch(error => {
+                toast.warning('Erro ao listar produtos')
+            })
+            //.catch(error => console.log(error))
     }, [])
 
 
@@ -49,6 +56,28 @@ function Order() {
         } else {
             setSelectedProducts(previous => [...previous, product]);
         }
+    }
+
+    /* sbmetendo os dados para o servidor */
+    const handleSubmit = () => {
+        //iterando sobre a lista de produtos selecionado, e extraindo apenas o ID de cada produto.
+        const productsIds = selectedProducts.map(({ id }) => ({ id }));
+
+        //mergando tudo que a no ' orderLocation ' coms o ' productsIds 'par forma o payload 
+        const payload = {
+            ...orderLocation!,
+            products: productsIds
+        }
+
+        saveOrder(payload)
+            .then((response) => {
+                toast.error(`Pedido enviado com sucesso! N° ${response.data.id}`); //sucesso
+                setSelectedProducts([]);  // limpa a lista.
+            })
+            .catch(() => {               
+                toast.warning('Erro ao enviar pedido');
+            })
+            
     }
 
     return (
@@ -68,6 +97,7 @@ function Order() {
                 <OrderSummary
                     amount={selectedProducts.length}
                     totalPrice={totalPrice}
+                    onSubmit={handleSubmit}
                 />
 
             </div>

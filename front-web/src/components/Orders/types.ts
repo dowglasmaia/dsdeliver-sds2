@@ -11,3 +11,11 @@ export interface OrderLocationData {
   latitude: number;
   longitude: number;
 }
+
+type ProductId ={
+  id: number
+}
+
+export type OrderPlaload ={
+  products: ProductId[];
+} & OrderLocationData;   // juntando um type com o outro, ou interface com outra, para  compartilhares os dados.

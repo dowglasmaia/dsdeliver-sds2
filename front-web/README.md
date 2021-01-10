@@ -22,3 +22,9 @@
 * ## https://react-select.com/home
 
 * ## API de Maps | https://www.mapbox.com/
+
+#
+
+* ## Toast para MSGs
+* https://www.npmjs.com/package/react-toastify 
+* https://fkhadra.github.io/react-toastify/introduction/ 

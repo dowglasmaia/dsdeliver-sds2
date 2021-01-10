@@ -1,14 +1,17 @@
 import './App.css';
-import Navbar from './components/Navbar';
 import Routes from './Routes';
 
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
   return (
-  
-      <Routes />
 
+    <>
+      <Routes />
+      
+      <ToastContainer/>
+    </>
   );
 }
 

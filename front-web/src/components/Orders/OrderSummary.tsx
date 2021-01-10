@@ -2,16 +2,19 @@ import { formatPrice } from "./helpers";
 
 interface IOrderSummaryProps {
     amount: number,
-    totalPrice: number
+    totalPrice: number,
+    onSubmit: ()=>void,
 }
 
 //import {formatPrice} from './helpers'
 
 function OrderSummary({
     amount,
-    totalPrice
+    totalPrice,
+    onSubmit
 }: IOrderSummaryProps) {
 
+    
     return (
         <div className="order-summary-container">
             <div className="order-summary-content">
@@ -31,7 +34,11 @@ function OrderSummary({
                     </span>
                 </div>
 
-                <button className="order-summary-make-order">FAZER PEDIDO</button>
+                <button 
+                    className="order-summary-make-order"
+                    onClick ={onSubmit}
+                    >FAZER PEDIDO
+                </button>
 
             </div>
         </div>
