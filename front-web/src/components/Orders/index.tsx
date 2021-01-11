@@ -40,7 +40,7 @@ function Order() {
             .catch(error => {
                 toast.warning('Erro ao listar produtos')
             })
-            //.catch(error => console.log(error))
+        //.catch(error => console.log(error))
     }, [])
 
 
@@ -74,10 +74,10 @@ function Order() {
                 toast.error(`Pedido enviado com sucesso! N° ${response.data.id}`); //sucesso
                 setSelectedProducts([]);  // limpa a lista.
             })
-            .catch(() => {               
+            .catch(() => {
                 toast.warning('Erro ao enviar pedido');
             })
-            
+
     }
 
     return (

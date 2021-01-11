@@ -28,3 +28,16 @@
 * ## Toast para MSGs
 * https://www.npmjs.com/package/react-toastify 
 * https://fkhadra.github.io/react-toastify/introduction/ 
+
+* ## Deploy
+* https://www.netlify.com/
+
+`Build command` 
+    npm run build
+
+# 
+`Publish directory`
+pasta do build: build
+
+
+
