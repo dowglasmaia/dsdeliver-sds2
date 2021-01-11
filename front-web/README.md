@@ -33,11 +33,14 @@
 * https://www.netlify.com/
 
 `Build command` 
-    npm run build
+    npm build
 
 # 
 `Publish directory`
 pasta do build: build
+
+#
+* para evitar error com rotas com SPA criar o arquivo: `_redirects `  e colar dentro do mesmo os dados '`  /*  /index.html  200 `'.
 
 
 

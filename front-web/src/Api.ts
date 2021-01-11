@@ -3,7 +3,9 @@ import { OrderPlaload } from "./components/Orders/types";
 
 const mapboxToken = process.env.REACT_APP_ACCESS_TOKEN_MAP_BOX; // PEGANDO A VARIAVEL DE HAMBIENTE CRIADA PARA GUARDA O TEOKEN DE FORMA SEGURA.
 
-const API_URL = "http://localhost:8080";
+//Rota como variavel de habiente
+const API_URL = process.env.REACT_APP_API_URL;
+
 
 /* retornar buscar para o endereço informada pelo ususrio */
 export function fetchLocalMapBox(local: string) {
